@@ -4,5 +4,4 @@
 |---|---|---|
 |Utilisateur| Créer une liste| rajouter une liste au kanban|
 |Utilisateur| Créer un carte | rajouter une carte dans une liste|
-|Utilisateur| Déplacer une carte | réorganiser les listes liste|
 |...|...|...|
