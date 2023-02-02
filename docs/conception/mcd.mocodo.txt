@@ -1,0 +1,6 @@
+LIST: code_list, name, position
+CARD: code_card, description, color, position
+TAG: name
+
+BELONG, 11 CARD, 0N LIST
+HAVE, 0N CARD, 0N TAG
