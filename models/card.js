@@ -13,7 +13,7 @@ Card.init(
     id: DataTypes.INTEGER, // on associe un type à chaque champ
     description: DataTypes.TEXT,
     color: DataTypes.TEXT,
-    position: DataTypes.STRING,
+    position: DataTypes.TEXT,
     code_list: DataTypes.INTEGER,
   },
  
