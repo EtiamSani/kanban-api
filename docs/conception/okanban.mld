@@ -1,0 +1,4 @@
+CARD ( code_card, description, color, position, #code_list )
+HAVE ( #code_card, #name )
+LIST ( code_list, name, position )
+TAG ( name, color )
