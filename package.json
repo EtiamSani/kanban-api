@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "sequelize": "^6.28.0"
+  },
+  "name": "oKanban-api-EtiamSani",
+  "description": "## JOUR 2",
+  "version": "1.0.0",
+  "main": "sync.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Ohm/oKanban-api-EtiamSani.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Ohm/oKanban-api-EtiamSani/issues"
+  },
+  "homepage": "https://github.com/O-clock-Ohm/oKanban-api-EtiamSani#readme"
+}
