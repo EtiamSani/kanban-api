@@ -1,14 +1,22 @@
 # User Stories
 
+
 |En tant que|Je veux pouvoir| Dans le but de|
 |---|---|---|
-|Utilisateur| me connecter |
-|Utilisateur| me deconnecter |
-|Utilisateur| Créer une liste| rajouter une liste au kanban|
-|Utilisateur| Créer un carte | rajouter une carte dans une liste|
-|Utilisateur| Donner et modifier le nom d'une liste | nommer une liste |
-|Utilisateur| Donner et modifier un titre d'une carte un label au sein d'une liste | nommer et personnaliser une carte |
-|Utilisateur| modifier la position d'une carte | d'organiser |
-|Utilisateur| modifier la couleur d'une carte | personnaliser|
-|Utilisateur| donner un ou plusieurs labels a une carte | rpersonnaliser et organiser |
-|...|...|...|
+|Utilisateur| Afficher les listes | permettre l'utilisation du kanban dans son état actuel |
+|Utilisateur| Créer une liste| rajouter une liste au kanban |
+|Utilisateur| Modifier une liste| Changer ses informations |
+|Utilisateur| Déplacer une liste| Modifier sa position au sein du board |
+|Utilisateur| Supprimer une liste| de ne plus la voir s'afficher et de supprimer ses cartes également |
+|Utilisateur| Afficher une carte | pour voir son contenu |
+|Utilisateur| Créer une carte | rajouter une carte dans une liste |
+|Utilisateur| Modifier une carte | mettre à jour son contenu ou sa couleur |
+|Utilisateur| Déplacer une carte | réorganiser la liste ou de changer la carte de liste |
+|Utilisateur| Supprimer une carte | ne plus la voir |
+|Utilisateur| Afficher les labels | afin d'en sélectionner un |
+|Utilisateur| Créer un label | augmenter la liste des labels disponibles |
+|Utilisateur| Modifier un label | corriger une faute ou sa couleur |
+|Utilisateur| Supprimer un label | qu'il ne soit plus rattacher aux cartes |
+|Utilisateur| Associer un label à une carte | qualifier la carte |
+
+Utilisateur = Utilisateur anonyme, non logué
