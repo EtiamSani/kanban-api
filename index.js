@@ -8,7 +8,7 @@ const router = require('./app/router');
 //
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
 
