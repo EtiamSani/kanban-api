@@ -11,7 +11,9 @@ CREATE TABLE "list"
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(255) NOT NULL,
-    "position" INT NOT NULL DEFAULT 0
+    "position" INT NOT NULL DEFAULT 0,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- table card
@@ -22,6 +24,8 @@ CREATE TABLE "card"
     "color" VARCHAR(7),
     "position" INT NOT NULL DEFAULT 0,
     "list_id" INT NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     CONSTRAINT "fk_card_list" 
         FOREIGN KEY ("list_id") 
         REFERENCES "list"("id")
@@ -33,7 +37,9 @@ CREATE TABLE "tag"
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(255) NOT NULL UNIQUE,
-    "color" VARCHAR(7)
+    "color" VARCHAR(7),
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- table de liaison card_tag

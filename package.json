@@ -1,0 +1,27 @@
+{
+  "name": "okanban-api-gaetanoclock",
+  "version": "1.0.0",
+  "description": "## JOUR 2",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Ohm/oKanban-api-GaetanOclock.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Ohm/oKanban-api-GaetanOclock/issues"
+  },
+  "homepage": "https://github.com/O-clock-Ohm/oKanban-api-GaetanOclock#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "pg": "^8.9.0",
+    "sequelize": "^6.28.0"
+  }
+}
