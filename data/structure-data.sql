@@ -1,129 +1,72 @@
--- BEGIN;
+/* Plusieurs relations identifiées : 
+Card <= N:N => Tag
+Card <= 1:N => List
+*/
 
--- -- DROP TABLE IF EXISTS "card", "list", "tag", "have";
+-- supprimer les tables qui seront créées dans ce script pour pouvoir le relancer ensuite
+DROP TABLE IF EXISTS "list", "card", "tag", "card_tag";
 
--- CREATE TABLE "card" (
--- "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
--- "description" TEXT NOT NULL,
--- "color" TEXT NOT NULL,
--- "position" TEXT NOT NULL,
--- "code_list" integer NOT NULL REFERENCES "list"("id"),
--- "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
--- "updated_at" TIMESTAMPTZ,
--- FOREIGN KEY ("code_list") REFERENCES "list"("id")
--- );
-
--- CREATE TABLE "list" (
--- "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
--- "name" TEXT NOT NULL,
--- "position" TEXT NOT NULL,
--- "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
--- "updated_at" TIMESTAMPTZ
--- );
-
-
--- CREATE TABLE "tag" (
--- "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
--- "name"TEXT NOT NULL, 
--- "color" TEXT NOT NULL,
--- "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
--- "updated_at" TIMESTAMPTZ
--- );
-
--- CREATE TABLE "have" (
--- "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
--- "code_card" integer NOT NULL REFERENCES "card"("id"),
--- "name" integer NOT NULL REFERENCES "tag"("id"),
--- FOREIGN KEY ("code_card") REFERENCES card("id"),
--- FOREIGN KEY (name) REFERENCES "tag"("id")
--- );
-
-
-
-
--- INSERT INTO "card" ("description","color","position","code_list") 
--- VALUES ('fefefefe','rouge','top : 50%',1),
--- ('fefeaaddadfefe','bleu','top : 55%',2),
--- ('fddededfefe','rose','top : 60%',3);
-
--- INSERT INTO "list" ("name","position") 
--- VALUES ('fefefefe','rouge'),
--- ('fefeaaddadfefe','bleu'),
--- ('fddededfefe','rose');
-
--- INSERT INTO "tag" ("name","color") 
--- VALUES ('fefefefe','rouge'),
--- ('fefeaaddadfefe','bleu'),
--- ('fddededfefe','rose');
-
--- INSERT INTO "have" ("code_card","name") 
--- VALUES (1,1),
--- (2,2),
--- (3,3);
-
--- -- ALTER TABLE "card" ADD FOREIGN KEY ("code_list") REFERENCES "list"("id");
--- -- ALTER TABLE "have" ADD FOREIGN KEY ("code_card") REFERENCES "card"("id");
--- -- ALTER TABLE "have" ADD FOREIGN KEY ("name") REFERENCES "tag"("id");
-
--- COMMIT;
-
-BEGIN;
-
-DROP TABLE IF EXISTS "card", "list", "tag", "have";
-
-CREATE TABLE "list" (
-"id" INTEGER GENERATED always AS IDENTITY PRIMARY KEY,
-"name" TEXT NOT NULL,
-"position" TEXT NOT NULL,
-"created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-"updated_at" TIMESTAMPTZ
+-- table list
+CREATE TABLE "list"
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "name" VARCHAR(255) NOT NULL,
+    "position" INT NOT NULL DEFAULT 0
 );
 
-CREATE TABLE "tag" (
-"id" INTEGER GENERATED always AS IDENTITY PRIMARY KEY,
-"name" TEXT NOT NULL,
-"color" TEXT NOT NULL,
-"created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-"updated_at" TIMESTAMPTZ
+
+
+-- table tag
+CREATE TABLE "tag"
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "name" VARCHAR(255) NOT NULL UNIQUE,
+    "color" VARCHAR(7)
 );
 
-CREATE TABLE "card" (
-"id" INTEGER GENERATED always AS IDENTITY PRIMARY KEY,
-"description" TEXT NOT NULL,
-"color" TEXT NOT NULL,
-"position" TEXT NOT NULL,
-"code_list" integer NOT NULL REFERENCES "list"("id"),
-"created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-"updated_at" TIMESTAMPTZ,
-FOREIGN KEY ("code_list") REFERENCES "list"("id")
+-- table card
+CREATE TABLE "card"
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "description" TEXT NOT NULL,
+    "color" VARCHAR(7),
+    "position" INT NOT NULL DEFAULT 0,
+    "list_id" INT NOT NULL,
+    CONSTRAINT "fk_card_list" FOREIGN KEY ("list_id") REFERENCES "list"("id") ON DELETE CASCADE
 );
 
-CREATE TABLE "have" (
-"id" INTEGER GENERATED always AS IDENTITY PRIMARY KEY,
-"code_card" integer NOT NULL REFERENCES "card"("id"),
-"name" integer NOT NULL REFERENCES "tag"("id"),
-FOREIGN KEY ("code_card") REFERENCES card("id"),
-FOREIGN KEY (name) REFERENCES "tag"("id")
+-- table de liaison card_tag
+-- cette table sert à faire des relations entre une entité A et une entité B, on y stocke les paires d'id qui caractérise ces relations
+CREATE TABLE "card_tag"
+(
+    "card_id" INTEGER NOT NULL,
+    "tag_id" INTEGER NOT NULL,
+    PRIMARY KEY ("card_id", "tag_id"), -- chaque paire card_id+tag_id est protégé des doublons
+    CONSTRAINT "fk_cardtag_card" FOREIGN KEY("card_id") REFERENCES "card"("id") ON DELETE CASCADE,
+    CONSTRAINT "fk_cardtag_tag" FOREIGN KEY("tag_id") REFERENCES "tag"("id") ON DELETE CASCADE
 );
 
-INSERT INTO "list" ("name","position")
-VALUES ('fefefefe','rouge'),
-('fefeaaddadfefe','bleu'),
-('fddededfefe','rose');
+-- Seeding
+INSERT INTO "list" ("name", "position") VALUES ('Todo', 0);
+INSERT INTO "list" ("name", "position") VALUES ('Doing', 1);
+INSERT INTO "list" ("name", "position") VALUES ('Done', 2);
 
-INSERT INTO "tag" ("name","color")
-VALUES ('fefefefe','rouge'),
-('fefeaaddadfefe','bleu'),
-('fddededfefe','rose');
 
-INSERT INTO "card" ("description","color","position","code_list")
-VALUES ('fefefefe','rouge','top : 50%',1),
-('fefeaaddadfefe','bleu','top : 55%',2),
-('fddededfefe','rose','top : 60%',3);
+INSERT INTO "tag" ("name", "color") VALUES ('Urgent', '#00FFF0');
+INSERT INTO "tag" ("name", "color") VALUES ('issue', '#0FFF00');
+INSERT INTO "tag" ("name", "color") VALUES ('bug', '#00FF00');
+INSERT INTO "tag" ("name", "color") VALUES ('ux/ui', '#00FFFF');
 
-INSERT INTO "have" ("code_card","name")
-VALUES (1,1),
-(2,2),
-(3,3);
 
-COMMIT;
+INSERT INTO "card" ("description", "color", "position","list_id") VALUES ('Première tâche', '#00FF00', 1, 0);
+INSERT INTO "card" ("description", "color", "position","list_id") VALUES ('Deuxième tâche', '#FFFF00', 2, 2);
+INSERT INTO "card" ("description", "color", "position","list_id") VALUES ('Troisième tâche', '#00FFFF', 3, 1);
+INSERT INTO "card" ("description", "color", "position","list_id") VALUES ('Quatrième tâche', '#0FFF00', 4, 2);
+INSERT INTO "card" ("description", "color", "position","list_id") VALUES ('Cinquième tâche', '#00FFF0', 5, 0);
+
+
+INSERT INTO "card_tag" ("card_id", "tag_id") VALUES (1, 3);
+INSERT INTO "card_tag" ("card_id", "tag_id") VALUES (2, 1);
+INSERT INTO "card_tag" ("card_id", "tag_id") VALUES (2, 3);
+INSERT INTO "card_tag" ("card_id", "tag_id") VALUES (3, 1);
+INSERT INTO "card_tag" ("card_id", "tag_id") VALUES (3, 2);

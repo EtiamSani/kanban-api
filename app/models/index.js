@@ -1,6 +1,6 @@
 
-const Card = require('./Card');
-const List = require('./List');
+const Card = require('../../models/card');
+const List = require('../../models/list');
 
 Tag.hasMany(Card, {
     foreignKey: 'card_code', 
