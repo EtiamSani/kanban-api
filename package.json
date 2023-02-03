@@ -1,13 +1,8 @@
 {
-  "dependencies": {
-    "dotenv": "^16.0.3",
-    "pg": "^8.9.0",
-    "sequelize": "^6.28.0"
-  },
-  "name": "oKanban-api-EtiamSani",
-  "description": "## JOUR 2",
+  "name": "okanban-api-gaetanoclock",
   "version": "1.0.0",
-  "main": "sync.js",
+  "description": "## JOUR 2",
+  "main": "index.js",
   "directories": {
     "doc": "docs"
   },
@@ -16,13 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/O-clock-Ohm/oKanban-api-EtiamSani.git"
+    "url": "git+https://github.com/O-clock-Ohm/oKanban-api-GaetanOclock.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/O-clock-Ohm/oKanban-api-EtiamSani/issues"
+    "url": "https://github.com/O-clock-Ohm/oKanban-api-GaetanOclock/issues"
   },
-  "homepage": "https://github.com/O-clock-Ohm/oKanban-api-EtiamSani#readme"
+  "homepage": "https://github.com/O-clock-Ohm/oKanban-api-GaetanOclock#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "pg": "^8.9.0",
+    "sequelize": "^6.28.0"
+  }
 }
