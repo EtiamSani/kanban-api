@@ -5,7 +5,7 @@
 |VERBE|ROUTE|DESCRIPTION|
 |------|------|------|  
 |GET | `/lists`| récupérer toutes les listes |
-|GET | `/lists/:id`| récupérer une liste |
+|GET | `/lists/:id`| récupérer une liste (avec les cartes liées)|
 |POST | `/lists`| créer une liste |
 |PUT | `/lists/:id`| modifier une liste |
 |DELETE | `/lists/:id`| supprimer une liste |
