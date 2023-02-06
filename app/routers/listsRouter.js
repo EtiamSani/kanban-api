@@ -7,6 +7,10 @@ const listsController = require('../controllers/listsController');
 
 // route GET '/lists/'
 listsRouter.get('/', listsController.getAll);
+listsRouter.get('/:listId', listsController.getOne);
+listsRouter.post('/', listsController.create);
+listsRouter.put('/:listId', listsController.update);
+listsRouter.delete('/:listId', listsController.delete);
 
 // on exporte le routeur
 module.exports = listsRouter;
