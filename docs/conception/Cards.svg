@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="194" height="278" viewBox="0 0 194 278" xmlns="http://www.w3.org/2000/svg">
+<rect id="frame" x="0" y="0" width="194" height="278" fill="#ffffbf" stroke="none" stroke-width="0"/>
+
+<!-- Association HAVE -->
+<g class="page_0_aWcz70i4 diagram_page" visibility="visible">
+	<line x1="146" y1="135" x2="146" y2="34" stroke="#66c2a5" stroke-width="2"/>
+	<text x="151" y="76" fill="#d53e4f" font-family="Verdana" font-size="12">0,N</text>
+	<line x1="42" y1="34" x2="146" y2="34" stroke="#66c2a5" stroke-width="2"/>
+	<text x="70" y="51" fill="#d53e4f" font-family="Verdana" font-size="12">0,N</text>
+	<g>
+		<path d="M156 9 a14 14 90 0 1 14 14 V34 h-48 V23 a14 14 90 0 1 14 -14" fill="#abdda4" stroke="#abdda4" stroke-width="0"/>
+		<path d="M170 34 v11 a14 14 90 0 1 -14 14 H136 a14 14 90 0 1 -14 -14 V34 H48" fill="#e6f598" stroke="#e6f598" stroke-width="0"/>
+		<rect x="122" y="9" width="48" height="50" fill="none" rx="14" stroke="#66c2a5" stroke-width="2"/>
+		<line x1="122" y1="34" x2="170" y2="34" stroke="#66c2a5" stroke-width="1"/>
+		<text x="129" y="26.75" fill="#000" font-family="Verdana" font-size="12">HAVE</text>
+	</g>
+</g>
+
+<!-- Association BELONG -->
+<g class="page_0_aWcz70i4 diagram_page" visibility="visible">
+	<line x1="146" y1="135" x2="42" y2="135" stroke="#66c2a5" stroke-width="2"/>
+	<text x="81" y="152" fill="#d53e4f" font-family="Verdana" font-size="12">1,1</text>
+	<line x1="42" y1="227" x2="42" y2="135" stroke="#66c2a5" stroke-width="2"/>
+	<text x="47" y="177" fill="#d53e4f" font-family="Verdana" font-size="12">0,N</text>
+	<g>
+		<path d="M61 110 a14 14 90 0 1 14 14 V135 h-66 V124 a14 14 90 0 1 14 -14" fill="#abdda4" stroke="#abdda4" stroke-width="0"/>
+		<path d="M75 135 v11 a14 14 90 0 1 -14 14 H23 a14 14 90 0 1 -14 -14 V135 H66" fill="#e6f598" stroke="#e6f598" stroke-width="0"/>
+		<rect x="9" y="110" width="66" height="50" fill="none" rx="14" stroke="#66c2a5" stroke-width="2"/>
+		<line x1="9" y1="135" x2="75" y2="135" stroke="#66c2a5" stroke-width="1"/>
+		<text x="17" y="127.75" fill="#000" font-family="Verdana" font-size="12">BELONG</text>
+	</g>
+</g>
+
+<!-- Entity TAG -->
+<g class="page_0_aWcz70i4 diagram_page" visibility="visible">
+	<g>
+		<rect x="19" y="9" width="46" height="25" fill="#fdae61" stroke="#fdae61" stroke-width="0" opacity="1"/>
+		<rect x="19" y="34" width="46" height="25" fill="#fee08b" stroke="#fee08b" stroke-width="0" opacity="1"/>
+		<rect x="19" y="9" width="46" height="50" fill="none" stroke="#f46d43" stroke-width="2" opacity="1"/>
+		<line x1="19" y1="34" x2="65" y2="34" stroke="#f46d43" stroke-width="1"/>
+	</g>
+	<text x="29" y="26.75" fill="#000" font-family="Verdana" font-size="12">TAG</text>
+	<text x="24" y="51.8" fill="#000" font-family="Verdana" font-size="12">name</text>
+	<line x1="24" y1="54" x2="59" y2="54" stroke="#000" stroke-width="1"/>
+</g>
+
+<!-- Entity CARD -->
+<g class="page_0_aWcz70i4 diagram_page" visibility="visible">
+	<g>
+		<rect x="107" y="84" width="78" height="25" fill="#fdae61" stroke="#fdae61" stroke-width="0" opacity="1"/>
+		<rect x="107" y="109" width="78" height="77" fill="#fee08b" stroke="#fee08b" stroke-width="0" opacity="1"/>
+		<rect x="107" y="84" width="78" height="102" fill="none" stroke="#f46d43" stroke-width="2" opacity="1"/>
+		<line x1="107" y1="109" x2="185" y2="109" stroke="#f46d43" stroke-width="1"/>
+	</g>
+	<text x="129" y="101.75" fill="#000" font-family="Verdana" font-size="12">CARD</text>
+	<text x="112" y="126.8" fill="#000" font-family="Verdana" font-size="12">code_card</text>
+	<line x1="112" y1="129" x2="175" y2="129" stroke="#000" stroke-width="1"/>
+	<text x="112" y="143.8" fill="#000" font-family="Verdana" font-size="12">description</text>
+	<text x="112" y="160.8" fill="#000" font-family="Verdana" font-size="12">color</text>
+	<text x="112" y="177.8" fill="#000" font-family="Verdana" font-size="12">position</text>
+</g>
+
+<!-- Entity LIST -->
+<g class="page_0_aWcz70i4 diagram_page" visibility="visible">
+	<g>
+		<rect x="10" y="185" width="64" height="25" fill="#fdae61" stroke="#fdae61" stroke-width="0" opacity="1"/>
+		<rect x="10" y="210" width="64" height="59" fill="#fee08b" stroke="#fee08b" stroke-width="0" opacity="1"/>
+		<rect x="10" y="185" width="64" height="84" fill="none" stroke="#f46d43" stroke-width="2" opacity="1"/>
+		<line x1="10" y1="210" x2="74" y2="210" stroke="#f46d43" stroke-width="1"/>
+	</g>
+	<text x="28" y="202.75" fill="#000" font-family="Verdana" font-size="12">LIST</text>
+	<text x="15" y="227.8" fill="#000" font-family="Verdana" font-size="12">code_list</text>
+	<line x1="15" y1="230" x2="69" y2="230" stroke="#000" stroke-width="1"/>
+	<text x="15" y="244.8" fill="#000" font-family="Verdana" font-size="12">name</text>
+	<text x="15" y="261.8" fill="#000" font-family="Verdana" font-size="12">position</text>
+</g>
+</svg>
