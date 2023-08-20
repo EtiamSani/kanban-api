@@ -5,10 +5,10 @@ const Tag = require('./Tag');
 const CardTag = require('./CardTag');
 
 // relation Card <= N:1 => List
-List.hasMany(Card, {foreignKey: 'list_id'});
-Card.belongsTo(List, {foreignKey: 'list_id'});
+List.hasMany(Card, {foreignKey: 'list_id', as: "cards"});
+Card.belongsTo(List, {foreignKey: 'list_id', as: "list"});
 
 // relation Card <= N:N => Tag
 // dans les relations many to many, les deux entités ont un belongsToMany()
 Tag.belongsToMany(Card, {through: CardTag});
-Card.belongsToMany(Tag, {through: CardTag});
+Card.belongsToMany(Tag, {through: CardTag, as: "tags"});

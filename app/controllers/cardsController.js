@@ -6,48 +6,54 @@ const List = require('../models/List');
 
 
 const cardController = {
-    getAll: async (req, res) => {
-
-        const cardId = Number(req.params.cardId)
+     // contrôleur pour la route /cards/
+     getAll: async (req, res) => {
         // récupérer les données => models
-        const allLists = await Card.findAll({where : {list_id: cardId}} , {
-            include: List
-        });
+        const allCards = await Card.findAll(
+             // On cherche toutes les cards
+        {
+            where: { // toutes les cards qui possèdent un list_id = params.id
+              list_id: listId
+            },
+            include: 'tags', // On incclue pour chaque card l'association "tags"
+            order: [
+              ['position', 'ASC'] // On trie par position ascendante
+            ]
+          }
+        );
         // renvoyer les données au format JSON
-        res.json(allLists);
+        res.json(allCards);
     }, 
     getOne: async (req, res, next) => {
         const cardId = Number(req.params.cardId);
 
         try {
-            // on peut ajouter en deuxième argument des options pour le findByPK, ici par exemple les modèles liés à inclure
-            const list = await Card.findByPk(cardId, {
-                include: Tag
+            const card = await Card.findByPk(cardId, {
+                include: 'tags', // Pour cette card on inclue l'association tags, donc tous les tags qui concernent cette carte
+        order: [
+          ['position', 'ASC']
+        ]
             });
-            // validation => si rien dans list => 404
-            if (!list) {
+
+            if (!card) {
                 next();
                 return;
             }
-            // réponse au format json
-            res.json(list);
+
+            res.json(card);
         } catch(err) {
-            res.status(500).json({
-                statusCode: 500,
-                message: "Server error",
-                fullErrorMessage: err
-            });
+            errors.error500(res, err);
         }
     }, 
     create: async (req, res, next) => {
         // il faut récupérer le name passé dans le body de la requête
         // pour éviter l'erreur Cannot read properties of undefined (reading 'name'), il faut penser à déclarer l'usage du middleware express.json() dans index.js
-        const description = req.body.description;
+        const description = req.body.title;
         const list_id = req.body.list_id;
         const position = req.body.position
-        const color = req.body.post;
+        const color = req.body.color;
         
-        console.log(description)
+        console.log('ici',description)
         // important : étape de validation, on renvoie une erreur 400 si on n'est pas content de ce que l'utilisateur nous a envoyé
         // typeof renvoie sous forme de string le type de l'élément analysé
         // ici name doit être une string et faire plus de 1 caractère
@@ -64,7 +70,6 @@ const cardController = {
             // enregistrer en bdd
             const list = await Card.create({description,list_id, position,color});
             // retourner ce model au format json
-            console.log(list)
             res.json(list);
         } catch(err) {
             res.status(500).json({
@@ -126,6 +131,54 @@ const cardController = {
             });
         }
     },
+    addTag: async (req, res, next) => {
+        // récupérer les données nécessaires
+        const cardId = Number(req.params.cardId);
+        const tagId = Number(req.body.tag_id);
+        console.log(cardId + 'tag',tagId)
+        // récupérer les models correspondant
+        const card = await Card.findByPk(cardId, {include: 'tags'});
+        const tag = await Tag.findByPk(tagId);
+        
+        // si un model n'existe pas, on renvoie en 404
+        if (!card || !tag) {
+            return next();
+        }
+
+        // faire l'association entre card et tag
+        // on peut utiliser une méthode générée automatiquement par sequelize, ici par exemple la méthode addTag() sur le model Card.
+        await card.addTag(tag);
+        // on met à jour card avant de le renvoyer sinon le nouveau tag ne sera pas apparent (bien qu'enregistré en base)
+        await card.reload();
+        res.json(card);
+    },
+
+    deleteTag: async (req, res) => {
+        try {
+          const { cardId, tagId } = req.params;
+    
+          let card = await Card.findByPk(cardId);
+          if (!card) {
+            return res.status(404).json('Can not find card with id ' + cardId);
+          }
+    
+          let tag = await Tag.findByPk(tagId);
+          if (!tag) {
+            return res.status(404).json('Can not find tag with id ' + tagId);
+          }
+    
+          await card.removeTag(tag);
+          card = await Card.findByPk(cardId, {
+            include: ['tags']
+          });
+          res.json(card);
+    
+        } catch (error) {
+          console.trace(error);
+          res.status(500).json(error);
+        }
+      }
+
 }
 
 module.exports = cardController;

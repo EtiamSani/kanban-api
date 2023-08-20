@@ -4,14 +4,25 @@ const Card = require('../models/Card');
 const listController = {
     // contrôleur pour la route /lists/
     getAll: async (req, res) => {
-        // récupérer les données => models
-        const allLists = await List.findAll({
-            order: [['position', 'ASC']]
-        });
-        // renvoyer les données au format JSON
-        res.json(allLists);
+        try {
+            const lists = await List.findAll({
+              include: {
+                association: 'cards',               // On inclue l'association cards (une list avec ses cards)
+                include: 'tags'                     // Pour chaque card, on inclue l'association tags (une card avec ses tags)
+              },
+              order: [                              // On trie
+                ['position', 'ASC'],                // Les listes par position ascendante (du plus petit au plus grand)
+                ['cards', 'position', 'ASC']        // Les cards par position ascendante 
+              ]
+            });
+            res.status(200).json(lists);            // On renvoie la réponse avec un code 200 : OK
+          } catch (error) {                         // En cas d'erreur
+            console.trace(error);                   // On affiche l'erreur en console
+            res.status(500).json(error.toString()); // On renvoie une réponse avec code 500 : internal server error, ainsi que le message d'erreur
+          }
+       
     }, 
-    getOne: async (req, res, next) => {
+    getOne: async (req, res) => {
         const listId = Number(req.params.listId);
 
         try {
@@ -21,7 +32,7 @@ const listController = {
             });
             // validation => si rien dans list => 404
             if (!list) {
-                next();
+                
                 return;
             }
             // réponse au format json
@@ -34,7 +45,7 @@ const listController = {
             });
         }
     }, 
-    create: async (req, res, next) => {
+    create: async (req, res) => {
         // il faut récupérer le name passé dans le body de la requête
         // pour éviter l'erreur Cannot read properties of undefined (reading 'name'), il faut penser à déclarer l'usage du middleware express.json() dans index.js
         const name = req.body.name;

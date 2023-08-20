@@ -1,42 +1,34 @@
 const Card = require('../models/Card');
 const Tag = require('../models/Tag');
 const List = require('../models/List');
+const errors = require('../modules/errors');
 
 
 
 
 const tagController = {
     getAll: async (req, res) => {
-
-        
-        // récupérer les données => models
-        const allLists = await Tag.findAll({
-            include: Card
-        });
-        // renvoyer les données au format JSON
-        res.json(allLists);
+        try {
+            const allTags = await Tag.findAll();
+            res.json(allTags);
+        } catch(err) {
+            errors.error500(res, err);
+        }
     }, 
     getOne: async (req, res, next) => {
-        const cardId = Number(req.params.cardId);
+        const tagId = Number(req.params.tagId);
 
         try {
-            // on peut ajouter en deuxième argument des options pour le findByPK, ici par exemple les modèles liés à inclure
-            const list = await Card.findByPk(cardId, {
-                include: Tag
+            const tag = await Tag.findByPk(tagId, {
+                include: Card
             });
-            // validation => si rien dans list => 404
-            if (!list) {
-                next();
-                return;
+
+            if (!tag) {
+                return next();
             }
-            // réponse au format json
-            res.json(list);
+            res.json(tag);
         } catch(err) {
-            res.status(500).json({
-                statusCode: 500,
-                message: "Server error",
-                fullErrorMessage: err
-            });
+            errors.error500(res, err);
         }
     }, 
     create: async (req, res, next) => {

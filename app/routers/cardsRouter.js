@@ -11,8 +11,8 @@ cardsRouter.get('/:cardId', cardsController.getOne);
 cardsRouter.post('/', cardsController.create);
 cardsRouter.put('/:cardId', cardsController.update);
 cardsRouter.delete('/:cardId', cardsController.delete);
-// cardsRouter.post('/:cardId/tags', cardsController.addTag);
-// cardsRouter.post('/:cardId/tags/:tagId', cardsController.deleteTag);
+cardsRouter.post('/:cardId/tags', cardsController.addTag);
+cardsRouter.delete('/:cardId/tags/:tagId', cardsController.deleteTag);
 
 
 // on exporte le routeur
